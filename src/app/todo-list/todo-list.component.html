@@ -1,0 +1,57 @@
+<div class="border  p-1 todoListDiv">
+  <input class="form-control w-75 m-auto formChangeName" [ngModel]="list.name" #name
+         (change)="changeListName($event)"/>
+  <hr class="separator"/>
+  <div class="container">
+  <div class="m-auto text-center"> Filtres :
+    <select class="custom-select filter" (change)="applyFilter()" [(ngModel)]="filterState">
+      <option value="all">All</option>
+      <option value="todo">Todo</option>
+      <option value="done">Complete</option>
+    </select>
+    <input class="form-control w-25 filter" (keyup)="applyFilter()" [(ngModel)]="filterName"
+           placeholder="Nom"/>
+    <p-dropdown [options]="CouleurFiltreLabel" [ngModel]="filterColor">
+      <ng-template let-item pTemplate="item">
+        <p class=" m-auto formColor"
+                [style.background-color]="item.value=='All'?'black':item.value" (click)="filterColor=item.value;applyFilter()"
+        ></p>
+      </ng-template>
+    </p-dropdown>
+    <input class="form-control w-25 filter" (keyup)="applyFilter()" [(ngModel)]="filterTag"
+           placeholder="Tag"/>
+  </div>
+  </div>
+  <hr class="separator"/>
+  <div class="ml-auto mr-auto mb-1 text-center mb-2">
+    <p-dropdown [options]="couleurLabel" ngDefaultControl [ngModel]="selectedColor">
+      <ng-template let-item pTemplate="item">
+        <p class=" m-auto formColor"
+           [style.background-color]="item.value=='All'?'black':item.value" (click)="selectedColor=item.value;"
+        ></p>
+      </ng-template>
+    </p-dropdown>
+    <input [(ngModel)]="newItemLabel" class="form-control w-50 newItem" placeholder="Nouvel Item" #label/>
+    # <input class="form-control newItemTag " [(ngModel)]="newItemTag" placeholder="Tag" #tag/>
+    <button class="btn btn-secondary" (click)="createItem(); ">OK</button>
+  </div>
+
+  <toaster-container [toasterconfig]="toasterconfig"></toaster-container>
+  <app-todo-item *ngFor="let item of filteredItems; let i = index; let last = last"
+                 [item]="item"
+                 [listId]="list.id"
+                 [last]="last"
+                 [index]="i"
+                 [clock]="item.clock"
+                 (onItemSort)="onItemSort($event)"
+                 (onItemDelete)="onItemDelete($event)"
+                 (onItemChange)="applyFilter()">
+    <div *ngIf="selectedItem===item" class="fa fa-hand-o-right"></div>
+  </app-todo-item>
+  <p-confirmDialog header="Confirmation" icon="fa fa-question-circle" appendTo="body" #cd (keydown.enter)="cd.accept()" (keyup.echap)="cd.reject()">
+    <p-footer>
+      <button type="button" pButton class="ui-button-info" icon="fa-close" label="Non" (click)="cd.reject()"></button>
+      <button type="button" pButton class="ui-button-danger" icon="fa-check" label="Oui" (click)="cd.accept()"></button>
+    </p-footer>
+  </p-confirmDialog>
+</div>

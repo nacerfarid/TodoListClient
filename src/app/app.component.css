@@ -1,0 +1,72 @@
+header {
+  display: flex;
+  flex-flow: row;
+  background: lightgreen;
+  margin: 0;
+  padding: 0.5em;
+  border-bottom: solid black 3px;
+}
+
+header > h1 {
+  flex: 1 1 auto;
+}
+
+header > section.user {
+  flex: 0 1 auto;
+  display: flex;
+  flex-flow: column;
+}
+
+header img.photo {
+  width: 6em;
+  height: 6em;
+  margin-left: 1em;
+}
+
+section.connection {
+  padding: 0;
+  margin: 0;
+  flex: 1 1;
+}
+
+section.connection > label:hover {
+  background: yellow;
+}
+
+.header{
+  height: 6%;
+}
+
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
+}
+.btn-circle.btn-lg {
+  width: 50px;
+  height: 50px;
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 25px;
+}
+.btn-circle.btn-xl {
+  width: 70px;
+  height: 70px;
+  padding: 10px 16px;
+  font-size: 24px;
+  line-height: 1.33;
+  border-radius: 35px;
+}
+.question{
+  right: -500%;
+}
+.noPadd{
+  padding-left: 0px;
+  padding-right: 0px;
+}

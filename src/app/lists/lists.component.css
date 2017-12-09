@@ -1,0 +1,46 @@
+.onDrop{
+  background-color: cornflowerblue;
+  border-radius: 10px;
+  padding: 3px;
+  height:8px!important;
+}
+
+.onDropStarted {
+  height:4px;
+}
+
+.big-glyphicon{
+  font-size: 22px;
+  animation: bounce 0.7s ease infinite;
+}
+
+@keyframes bounce{
+  from {top: 10px;}
+  50%  {top: 0px;}
+  to   {top: 10px;}
+}
+
+/** Separator **/
+.separator{
+  border-color: blue;
+  margin-top: 5px;
+}
+
+@media (min-width: 576px) {
+  .separator {
+    margin-left: -4px;
+    margin-right: -4px;
+    margin-top: 12px;
+  }
+}
+
+@media (min-width: 768px) {
+  .separator {
+    margin-left: -16px;
+    margin-right: -16px;
+  }
+}
+
+.divList{
+  height: 88%;
+}

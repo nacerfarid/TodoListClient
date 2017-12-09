@@ -1,0 +1,29 @@
+<div [style.backgroundColor]="item.data['color']" class="item">
+  <div droppable [dropScope]="'item'" (onDrop)="onDropDataOrder($event, $event['newIndex'])" [dragOverClass]="'onDrop'" [dragHintClass]="'onDropStarted'"></div>
+  <i *ngIf="item.data['selected']" class="fa fa-hand-o-right"></i>
+  <i (click)="delete()"
+     class="fa fa-window-close-o fa-2x float-right deleteButtonMargin"></i>
+  <div class="round">
+    <input #isChecked type="checkbox" [ngModel]="item.checked" (ngModelChange)="check(isChecked.checked)"
+           class="itemCheckbox" [attr.id]="'checkbox'+item.id"/>
+    <label [attr.for]="'checkbox'+item.id"></label>
+  </div>
+  <div draggable [dragScope]="'item'" [dragData]="item"
+       *ngIf="!isEditingLabel()" (dblclick)="editLabel(true)" class="itemLabel">
+    {{item.label}}
+  </div>
+  <div *ngIf="!isEditingLabel()" class="float-right mr-3 mh-100 tag"># {{item.data["tag"]}}</div>
+  <div *ngIf="last" droppable [dropScope]="'item'" (onDrop)="onDropDataOrder($event)" [dragOverClass]="'onDrop'" [dragHintClass]="'onDropStarted'"></div>
+  <form *ngIf="isEditingLabel()" (change)="editItem(newLabel.value, newTag.value);" class="form-inline editionLabel">
+    <input #newLabel autofocus type="text" [value]="item.label" class="form-control w-50 newLabelStyle"/>
+    <input #newTag type="text" [value]="item.data['tag']" class="form-control w-25 newTagStyle"/>
+  </form>
+  <p-growl [(value)]="msgs"></p-growl>
+  <p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425" appendTo="body" #cd (keydown.enter)="cd.accept()" (keyup.echap)="cd.reject()">
+    <p-footer>
+      <button type="button" pButton class="ui-button-info" icon="fa-close" label="Non" (click)="cd.reject()"></button>
+      <button type="button" pButton class="ui-button-danger" icon="fa-check" label="Oui" (click)="cd.accept()"></button>
+    </p-footer>
+  </p-confirmDialog>
+  <toaster-container [toasterconfig]="toasterconfig"></toaster-container>
+</div>

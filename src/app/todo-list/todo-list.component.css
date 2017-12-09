@@ -1,0 +1,28 @@
+.separator {
+  border-color: blue;
+  margin:3px -4px;
+}
+
+.filter {
+  max-height: 35px;
+  max-width: 15%;
+  display: inline
+}
+.newItem {
+  display: inline;
+}
+.newItemTag {
+  display: inline;
+  max-width: 10%;
+}
+.todoListDiv{
+  border-left: hidden;
+  height: 100%;
+}
+.formChangeName{
+  max-height: 32px;
+}
+.formColor{
+  /*width: 25px;*/
+  height: 25px;
+}

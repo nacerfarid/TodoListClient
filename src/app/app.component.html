@@ -1,0 +1,85 @@
+<!--<header *ngIf="getUser()">
+<section class="user">
+<label>Identifié via {{getUserProvider()}}</label>
+<section class="connection">
+<label *ngIf="getConnected() | async">✅ connecté</label>
+<label *ngIf="!(getConnected() | async)" (click)="tryReconnectSocket()">✗ déconnecté</label>
+</section>
+<label>{{getUserName()}}</label>
+<label>{{getUserMail()}}</label>
+</section>
+<img class="photo" [src]="getUserPhoto()" />
+</header>-->
+<body>
+<div class="container col-8 offset-2 col-xl-6 offset-xl-3 h-100 noPadd" [ngStyle]="allRequiredStyles()">
+  <div class="border col-12 text-center mt-3 mb-1 p-3 header">
+    <div style="float: left"><p-inputSwitch onLabel="Foncé" offLabel="Clair" (click)="showStyle = !showStyle"></p-inputSwitch></div>
+    {{title}}
+  </div>
+  <router-outlet></router-outlet>
+  <div class="float-right">
+    <p-dialog header="Liste des raccourcis" [(visible)]="display" modal="modal" [responsive]="true" appendTo="body">
+      <table class="table table-condensed">
+        <caption>Raccourcis Liste</caption>
+        <thead class="thead-dark">
+        <tr>
+          <th>Combinaison</th> <th>Fonction</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>Shift+c</td> <td>Créer une liste.</td>
+        </tr>
+        <tr>
+          <td>Shift+r</td> <td>Supprimer une liste.</td>
+        </tr>
+        <tr>
+          <td>Shift+d</td> <td>Dupliquer une liste.</td>
+        </tr>
+        <tr>
+          <td>Shift+e</td> <td>Renommer une liste.</td>
+        </tr>
+        <tr>
+          <td>Tab</td> <td>Déplacer vers la liste suivante.</td>
+        </tr>
+        <tr>
+          <td>Shift+Tab</td> <td>Déplacer vers la liste précedente.</td>
+        </tr>
+        </tbody>
+      </table>
+      <table class="table">
+        <caption>Raccourcis Item</caption>
+        <thead class="thead-dark">
+        <tr>
+          <th>Combinaison</th> <th>Fonction</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>Alt+c</td> <td>Créer un item.</td>
+        </tr>
+        <tr>
+          <td>Alt+e</td> <td>Editer un item.</td>
+        </tr>
+        <tr>
+          <td>Flèche Up</td> <td>Déplacer vers l'item suivant.</td>
+        </tr>
+        <tr>
+          <td>Flèche Down</td> <td>Déplacer vers l'item précédent.</td>
+        </tr>
+        <tr>
+          <td>Alt+v</td> <td>Cocher l'item actuel.</td>
+        </tr>
+        <tr>
+          <td>Alt+d</td> <td>Effacer l'item actuel.</td>
+        </tr>
+        </tbody>
+      </table>
+      <p-footer>
+        <button type="button" pButton icon="fa-check" (click)="display=false" label="OK"></button>
+      </p-footer>
+    </p-dialog>
+    <button type="button" (click)="showHelp()" pButton class="btn btn-circle btn-lg float-right question" icon="fa fa-question-circle-o" style="font-size: 50px;"></button><br>
+  </div>
+</div>
+</body>

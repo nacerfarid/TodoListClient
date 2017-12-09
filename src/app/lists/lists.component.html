@@ -1,0 +1,26 @@
+<div class="row no-gutters divList" #listsElement>
+  <div class="col-4 col-lg-3 border p-lg-3 p-md-3 p-xl-3 pt-sm-3 p-sm-1 m-0">
+    <form class="mb-4 mt-1 align-top form-inline " (ngSubmit)="createList()">
+      <button class="btn-primary btn">Créer</button>
+      <i class="glyphicon glyphicon-trash ml-auto" droppable [dropScope]="'list'"
+         [dragHintClass]="'big-glyphicon'" (click)="deleteLists()" (onDrop)="onDropDataDelete($event)"></i>
+    </form>
+    <hr class="separator"/>
+    <div *ngFor="let list of getLists(); let i = index; let last = last">
+      <div droppable [dropScope]="'list'" (onDrop)="onDropDataOrder($event,i)" [dragOverClass]="'onDrop'" [dragHintClass]="'onDropStarted'"></div>
+      <i *ngIf="selectedList===list" class="fa fa-hand-o-right"></i>
+      <input type="checkbox" [ngModel]="list.data['checked']" (change)="checkList(list, $event)"/>
+      <span (click)="selectList(list)" draggable [dragScope]="'list'" [dragData]="list">{{list.name}}</span>
+      <div *ngIf="last" droppable [dropScope]="'list'" (onDrop)="onDropDataOrder($event,i+1)" [dragOverClass]="'onDrop'" [dragHintClass]="'onDropStarted'"></div>
+    </div>
+
+  </div>
+  <app-todo-list class="col-8 col-lg-9 mh-100" *ngIf="getSelectedList()" [list]="getSelectedList()" [clock]="getSelectedList().clock"></app-todo-list>
+  <toaster-container [toasterconfig]="toasterconfig"></toaster-container>
+  <p-confirmDialog (keydown.enter)="cd.accept()" (keyup.echap)="cd.reject()" key="listDialog" header="Confirmation" icon="fa fa-question-circle" appendTo="body" #cd>
+    <p-footer>
+      <button type="button" pButton class="ui-button-info" icon="fa-close" label="Non" (click)="cd.reject()"></button>
+      <button type="button" pButton class="ui-button-danger" icon="fa-check" label="Oui" (click)="cd.accept()"></button>
+    </p-footer>
+  </p-confirmDialog>
+</div>
